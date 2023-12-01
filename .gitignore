@@ -1,8 +1,10 @@
 *
 
+!2023/
+
 !.gitignore
 !flake.lock
 
+!*.in
 !*.md
 !*.nix
-!*.nu
