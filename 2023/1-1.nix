@@ -1,6 +1,6 @@
 { lib, input }:
 
-with lib; with builtins; let
+with builtins; with lib; rec {
   lines = splitString "\n" input;
 
   linesChars = map (splitString "") lines;
@@ -14,4 +14,4 @@ with lib; with builtins; let
   sumOfLinesNumbers = foldl' add 0 (map fromJSON linesNumbers);
 
   result = sumOfLinesNumbers;
-in result
+}
