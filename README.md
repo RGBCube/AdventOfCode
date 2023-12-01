@@ -1,6 +1,6 @@
 # RGBCube's Advent of Code Solutions
 
-Run `nix eval .#<day>-<part>` to get the solution to the part of the days problem.
+See `./run.nu --help` for instructions on how to run the scripts.
 
 ## License
 
