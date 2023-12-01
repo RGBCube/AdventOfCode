@@ -10,7 +10,7 @@ def main [
     }
     "py" => {
       cd ($year_day_part_ext | path dirname)
-      python $year_day_part_ext
+      python ($year_day_part_ext | path basename)
       cd -
     }
   }
