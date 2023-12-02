@@ -13,9 +13,11 @@
     pathToResult = path: (import ./${path}.nix {
       inherit lib;
 
-      input = builtins.concatStringsSep "\n"
+      input = let
+        inputPath = lib.head (lib.splitString "-" path);
+      in builtins.concatStringsSep "\n"
         (builtins.filter (line: line != "")
-          (lib.splitString "\n" (builtins.readFile ./${path}.in)));
+          (lib.splitString "\n" (builtins.readFile ./${inputPath}.in)));
     }).result;
   in lib.genAttrs [
     "2023/1-1"
