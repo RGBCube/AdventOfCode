@@ -20,5 +20,6 @@
   in lib.genAttrs [
     "2023/1-1"
     "2023/1-2"
+    "2023/2-1"
   ] pathToResult;
 }
