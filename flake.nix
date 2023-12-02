@@ -10,19 +10,19 @@
   outputs = { nixpkgs, ... }: let
     lib = nixpkgs.lib;
 
-    pathToResult = path: (import ./${path}.nix {
-      inherit lib;
+    solutions = [
+      "2023/1-1"
+      "2023/1-2"
+      "2023/2-1"
+      "2023/2-2"
+    ];
+  in with builtins; with lib; genAttrs solutions (path: (import ./${path}.nix {
+    inherit lib;
 
-      input = let
-        inputPath = lib.head (lib.splitString "-" path);
-      in builtins.concatStringsSep "\n"
-        (builtins.filter (line: line != "")
-          (lib.splitString "\n" (builtins.readFile ./${inputPath}.in)));
-    }).result;
-  in lib.genAttrs [
-    "2023/1-1"
-    "2023/1-2"
-    "2023/2-1"
-    "2023/2-2"
-  ] pathToResult;
+    input = let
+      inputPath = head (splitString "-" path);
+      inputStringLines = splitString "\n" (readFile ./${inputPath}.in);
+      inputStringNoEmpty = concatStringsSep "\n" (filter (line: line != "") inputStringLines);
+    in inputStringNoEmpty;
+  }).result);
 }
