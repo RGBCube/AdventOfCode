@@ -11,7 +11,5 @@ with builtins; with lib; rec {
 
   linesNumbers = map firstAndLastConcatted linesOnlyNumbers;
 
-  sumOfLinesNumbers = foldl' add 0 (map fromJSON linesNumbers);
-
-  result = sumOfLinesNumbers;
+  result = foldl' add 0 (map fromJSON linesNumbers);
 }
