@@ -1,5 +1,5 @@
 {
-  description = "RGBCube's Advent of Code Solutions.";
+  description = "RGBCube's Advent of Code solutions.";
 
   inputs = {
     nixpkgs = {
