@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-# Run a specified AoC challenge.
+# Run a specified AoC solution.
 def main [
   year_day_part_ext: string # The file to run. For example `2023/1-2.py` or `2023/1-2.nix`.
 ] {
