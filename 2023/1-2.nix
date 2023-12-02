@@ -14,10 +14,7 @@ with builtins; with lib; rec {
     nine  = "9";
   };
 
-  toDigit = maybeDigit: if digits ? "${maybeDigit}" then
-    digits.${maybeDigit}
-  else
-    maybeDigit;
+  toDigit = maybeDigit: digits.${maybeDigit} or maybeDigit;
 
   allNeedles = flatten (mapAttrsToList (key: value: [ key (toString value) ]) digits); 
   allNeedlesReverse = map reverseString allNeedles;
