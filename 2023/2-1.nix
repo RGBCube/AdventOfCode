@@ -3,7 +3,8 @@
 with builtins; with lib; rec {
   lines = splitString "\n" input;
 
-  lineToId = line: removePrefix "Game " (head (splitString ": " line));
+  lineToId = line: fromJSON (removePrefix "Game " (head (splitString ": " line)));
+
   lineToRawRGBListList = line:
     map (splitString ", ")
       (splitString "; "
@@ -15,18 +16,18 @@ with builtins; with lib; rec {
       parts = splitString " " entry;
     in {
       name = last parts;
-      value = head parts;
+      value = fromJSON (head parts);
     }) rawList);
 
-  # [ { fst = "1"; snd = [ { blue = 1; red = 2; green = 123; } ]; } ]
+  # [ { fst = 1; snd = [ { blue = 1; red = 2; green = 123; } ]; } ]
   games = zipLists (map lineToId lines) (map (map parseRawRGBList) (map lineToRawRGBListList lines));
 
   rgbPossible = rgb:
-    (fromJSON (rgb.red or "0")) <= 12 &&
-    (fromJSON (rgb.green or "0")) <= 13 &&
-    (fromJSON (rgb.blue or "0")) <= 14;
+    (rgb.red or 0) <= 12 &&
+    (rgb.green or 0) <= 13 &&
+    (rgb.blue or 0) <= 14;
 
   possibleGamesLists = filter (game: all rgbPossible game.snd) games;
 
-  result = foldl' add 0 (map (game: fromJSON game.fst) possibleGamesLists);
+  result = foldl' add 0 (map (game: game.fst) possibleGamesLists);
 }
