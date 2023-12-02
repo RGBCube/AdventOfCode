@@ -7,7 +7,7 @@ with builtins; with lib; rec {
     maxRGB
   else getMaxRGB {
     maxRGB = mapAttrs (name: max (head rgbs).${name} or 0) maxRGB;
-    rgbs = sublist 1 (length rgbs - 1) rgbs;
+    rgbs = tail rgbs;
   };
 
   makeOneIfZero = number: if number == 0 then 1 else number;
